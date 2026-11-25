@@ -1,0 +1,7 @@
+<!doctype html><meta charset="utf-8"><title>relay</title>
+<script>
+// Fetches ?f=<file> from this site and posts the Blob to the parent window.
+(async()=>{const f=new URLSearchParams(location.search).get('f');if(!f)return;
+try{const r=await fetch(f);const b=await r.blob();parent.postMessage({bbRelay:true,name:f.split('/').pop(),blob:b},'*');}
+catch(e){parent.postMessage({bbRelay:true,error:String(e)},'*');}})();
+</script>
